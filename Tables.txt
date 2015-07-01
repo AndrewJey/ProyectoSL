@@ -1,0 +1,35 @@
+CREATE TABLE playlist
+(
+  id serial NOT NULL,
+  name character varying(250) NOT NULL,
+  users_id integer NOT NULL,
+  CONSTRAINT playlist_pkey PRIMARY KEY (id)
+)
+
+CREATE TABLE song
+(
+  id serial NOT NULL,
+  user_id integer NOT NULL,
+  name character varying(250) NOT NULL,
+  gender character varying(150),
+  author character varying(250),
+  public integer,
+  file character varying(200),
+  CONSTRAINT song_pkey PRIMARY KEY (id)
+)
+
+CREATE TABLE songsinplaylist
+(
+  id_song integer NOT NULL,
+  id_playlist integer NOT NULL
+)
+
+CREATE TABLE users
+(
+  id serial NOT NULL,
+  username character varying(200) NOT NULL,
+  name character varying(250) NOT NULL,
+  email character varying(250) NOT NULL,
+  password character varying(250) NOT NULL,
+  CONSTRAINT users_pkey PRIMARY KEY (id)
+)
