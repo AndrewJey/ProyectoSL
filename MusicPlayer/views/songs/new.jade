@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    div.row
+      h1.
+        #{title}
+    form#formAddSong(name="addsong",method="post",action="/songs", enctype="multipart/form-data")
+      div.row
+        h3.subheader Name: 
+        input#inputName(type="text", placeholder="Song name", name="name", required)
+        h3.subheader Path:
+        input#inputPath(type="file", name="path", required)
+        h3.subheader Genre: 
+        input#inputGenre(type="text", placeholder="Song genre", name="genre", required)
+        h3.subheader Artist: 
+        input#inputArtist(type="text", placeholder="Song artist", name="artist", required)
+      ul.inline-list   
+        li
+          a(href='/songs' class='small button') Back
+        li
+          button#btnSubmit(type='submit',class="small button") New
+        - if (messages.error)
+        .message.error
+        span= messages.error

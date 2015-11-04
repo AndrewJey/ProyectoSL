@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+    div.row
+      h1.
+        Song ID #{song._id}
+    form(action='/songs/#{song._id}/edit',method='post',name='updatesong',enctype='application/x-www-form-urlencoded')
+      div.row
+        h3.subheader Name: 
+        input#inputName(type='text', value='#{song.name}', name='name', required)
+        h3.subheader Genre: 
+        input#inputGenre(type='text', value='#{song.genre}', name='genre', required)
+        h3.subheader Artist: 
+        input#inputArtist(type='text', value='#{song.artist}', name='artist', required)
+        input(type='hidden',value='PUT',name='_method') 
+            
+      ul.inline-list   
+        li
+          a(href='/songs' class='small button') Back
+        li
+          button#btnSubmit(type='submit',class="small button") Update

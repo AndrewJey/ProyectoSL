@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    <link href="/css/foundation.css" rel="stylesheet" type="text/css">
+    title= title
+    
+  body
+    div(class="icon-bar three-up")
+      a(href='/songs').item.
+        All Songs
+      a(href='/').item.
+        Home
+      a(href='/videos').item.
+        All Videos
+    block content

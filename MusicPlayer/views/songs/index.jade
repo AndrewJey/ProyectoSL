@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+    div.row
+      h1.
+         #{title}
+    div.row
+        div(class="large-12 large-offset-2 columns")
+            table
+                thead
+                    tr  
+                        th Name 
+                        th Path
+                        th Genre
+                        th Artist
+                        th Actions
+                tbody
+                    each song, i in songs
+                        tr
+                            td 
+                                = song.name
+                            td 
+                                = song.path
+                            td
+                                = song.genre
+                            td
+                                = song.artist
+                            td
+                                ul.inline-list
+                                    li
+                                        a(href='/songs/#{song._id}/edit'): button(class="small button") Edit    
+                                    li
+                                        a(href='/songs/#{song._id}'): button(class="small button") Show    
+                                    li
+                                        form(action='/songs/#{song._id}/delete',method='post',enctype='application/x-www-form-urlencoded')
+                                            input(type='hidden',value='DELETE',name='_method')
+                                            button(class="small button",type='submit').
+                                                Delete
+    div.row
+      a(href='/songs/new' class='small button') New Song

@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+    div.row
+      h1.
+        Song
+    div.row
+        div(class="medium-12 medium-offset-3 columns")
+            table(width="50%")
+                thead
+                    tr  
+                      th Name 
+                      th Path
+                      th Genre
+                      th Artist
+                tbody
+                    tr
+                      td 
+                        = song.name
+                      td 
+                        = song.path
+                      td
+                        = song.genre
+                      td
+                        = song.artist
+          audio( autobuffer, controls, type="audio/mpeg")
+            source(src='/'+song.path)
+    div.row
+      a(href='/songs' class='small button') Back

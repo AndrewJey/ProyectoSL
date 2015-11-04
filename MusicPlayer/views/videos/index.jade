@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+    div.row
+      h1.
+         #{title}
+    div.row
+      div(class="large-12 large-offset-2 columns")
+        table
+          thead
+            tr  
+                th Name 
+                th Path
+                th Genre
+                th Actions
+          tbody
+            each video, i in videos
+                tr
+                    td 
+                        = video.name
+                    td 
+                        = video.path
+                    td
+                        = video.genre
+                    td
+                      ul.inline-list
+                        li
+                          a(href='/videos/#{video._id}/edit'): button(class="small button") Edit    
+                        li
+                          a(href='/videos/#{video._id}'): button(class="small button") Show
+                        li
+                          form(action='/videos/#{video._id}/delete',method='post',enctype='application/x-www-form-urlencoded')
+                            input(type='hidden',value='DELETE',name='_method')
+                            button(type='submit',class="small button").
+                                Delete
+
+    div.row
+      a(href='/videos/new' class='small button') New Video

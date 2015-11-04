@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+    div.row
+      h1.
+        #{title}
+    form#formAddVideo(name="addvideo",method="post",action="/videos", enctype="multipart/form-data")
+      div.row
+        h3.subheader Name: 
+        input#inputName(type="text", placeholder="Video name", name="name", required)
+        h3.subheader Path:
+        input#inputPath(type="file", name="path", required)
+        h3.subheader Genre: 
+        input#inputGenre(type="text", placeholder="Video genre", name="genre", required)
+      ul.inline-list   
+        li
+          a(href='/videos' class='small button') Back
+        li
+          button#btnSubmit(type='submit',class="small button") New
+        - if (messages.error)
+        .message.error
+        span= messages.error

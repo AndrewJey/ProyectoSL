@@ -1,0 +1,17 @@
+{
+  "name": "PWSR",
+  "version": "0.0.1",
+  "authors": [
+    "PWSR"
+  ],
+  "description": "PWSR",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "homepage": "PWSR.init",
+  "dependencies": {
+    "bootstrap-material-design": "~0.3.0",
+    "bootstrap": "~3.3.5"
+  }
+}
