@@ -2,3 +2,68 @@
 /node_modules
 Homestead.yaml
 .env
+
+# local-development:start
+# Local editor state and temporary files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sublime-workspace
+.idea/
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+Desktop.ini
+# Local credentials; keep sanitized example configuration in Git
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+!.env.*.example
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.publishsettings
+*.pubxml.user
+local.settings.json
+id_rsa
+id_ed25519
+# JavaScript dependency and build output
+node_modules/
+.npm/
+.next/
+.nuxt/
+.output/
+.parcel-cache/
+.docusaurus/
+.svelte-kit/
+.turbo/
+build/
+dist/
+coverage/
+npm-debug.log*
+yarn-error.log*
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+htmlcov/
+*.egg-info/
+# PHP dependency and framework caches
+vendor/
+.phpunit.cache/
+.phpunit.result.cache
+# local-development:end
