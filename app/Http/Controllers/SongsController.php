@@ -28,8 +28,9 @@ class SongsController extends Controller {
     
     ///Index Action
     public function index() {
-        
-        Session::put('user_id', '10');
+        if (!Session::has('user_id')) {
+            Session::put('user_id', '10');
+        }
         
         ///gets the PlayLists for the given user
         $songs = DB::table($this->table)->orderBy('id', 'asc')->get();
@@ -48,17 +49,20 @@ class SongsController extends Controller {
     public function createPost(Request $request) {
         
         ///Gets the Values from the form
-        $name = $request->input('name');
-        $author = $request->input('author');
-        $gender = $request->input('gender');
+        $name = trim((string) $request->input('name'));
+        $author = trim((string) $request->input('author'));
+        $gender = trim((string) $request->input('gender'));
         $file = $request->file('file');
-        $public = $request->input('public');
-        
-        if ($public) {
-            $public = 1;
+        $public = $request->input('public') ? 1 : 0;
+
+        if ($name === '' || !$file || !$file->isValid()) {
+            return Redirect::back()->withInput()->withErrors(['file' => 'El nombre y un archivo de audio válido son obligatorios.']);
         }
-        else {
-            $public = 0;
+
+        $ext = strtolower($file->getClientOriginalExtension() ?: $file->getExtension());
+        $allowedExt = array('mp3', 'wav', 'ogg', 'm4a', 'flac');
+        if (!in_array($ext, $allowedExt, true)) {
+            return Redirect::back()->withInput()->withErrors(['file' => 'Formato de audio no permitido.']);
         }
         
         $user_id = Session::get('user_id');
@@ -73,7 +77,7 @@ class SongsController extends Controller {
                     'user_id' => $user_id
                     ));
         
-        $new_file_name = 'file_' . $new_id . '.' . $file->getExtension();
+        $new_file_name = 'file_' . $new_id . '.' . $ext;
 
         DB::table($this->table)->where('id', $new_id )
                 ->update(array(

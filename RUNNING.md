@@ -61,3 +61,11 @@ Inventario y compilaciones locales del 2026-11-15. Una compilación correcta no 
 
 `.gitignore` excluye credenciales locales, estado del editor y salidas de las herramientas detectadas. No deja de versionar archivos que ya estaban en Git. Los manifiestos, archivos de bloqueo, recursos fuente y scripts de esquema forman parte del código.
 <!-- local-development:end -->
+
+<!-- improvements-20261119:start -->
+## Mejoras y verificación — 2026-11-19 (Validación de cargas de audio/playlists y configuración por entorno en MusicPlayer)
+
+- Añadidas validaciones de nombre y archivo de audio válido (`getClientOriginalExtension`, lista blanca mp3/wav/ogg/m4a/flac) en `SongsController.php` y validación de nombre/ID en `PlaylistController.php`.
+- Añadido soporte de `MONGODB_URI` y `SESSION_SECRET` en `MusicPlayer/model/db.js` y `MusicPlayer/app.js` eliminando ruta estática duplicada.
+- Validación: `node --check` y `node --test` sobre `MusicPlayer` y guardas de controladores Laravel.
+<!-- improvements-20261119:end -->

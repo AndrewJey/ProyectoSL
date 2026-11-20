@@ -40,9 +40,10 @@ class PlaylistController extends Controller {
     }
 
     public function createPost(Request $request) {
-        
-        ///Gets the Values from the form
-        $name = $request->input('name');
+        $name = trim((string) $request->input('name'));
+        if ($name === '') {
+            return Redirect::back()->withInput()->withErrors(['name' => 'El nombre de la playlist es obligatorio.']);
+        }
         $user_id = Session::get('user_id');
         
         ///Inserts in the Db
@@ -53,9 +54,10 @@ class PlaylistController extends Controller {
     }
     
     public function edit($playlist_id) {
-
-        ///Gets the play list data
-        $play_list = DB::table('playlist')->where('id', $playlist_id)->first();
+        $play_list = DB::table('playlist')->where('id', (int) $playlist_id)->first();
+        if (!$play_list) {
+            return Redirect::action('PlaylistController@index');
+        }
         
         ///Data used in the view
         $view_data = ['playlist' => $play_list];
@@ -64,12 +66,12 @@ class PlaylistController extends Controller {
     }
     
     public function editPost(Request $request) {
+        $name = trim((string) $request->input('name'));
+        $playlist_id = (int) $request->input('playlist_id');
+        if ($name === '' || $playlist_id <= 0) {
+            return Redirect::back()->withInput()->withErrors(['name' => 'Datos inválidos para actualizar la playlist.']);
+        }
         
-        ///Gets the Values from the form
-        $name = $request->input('name');
-        $playlist_id = $request->input('playlist_id');
-        
-        ///Inserts in the Db
         DB::table($this->table)
             ->where('id', $playlist_id)
             ->update(array('name' => $name));

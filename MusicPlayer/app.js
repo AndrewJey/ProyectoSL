@@ -29,9 +29,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ secret : 'node', cookie: { maxAge: 60000 }}));
-  app.use(flash());
-app.use(express.static(__dirname + '/uploads'));
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'music-player-dev-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 }
+}));
+app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'uploads')));
 
